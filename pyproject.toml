@@ -1,0 +1,79 @@
+[build-system]
+requires      = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ──────────────────────────────────────────────────────────────────────────
+[project]
+name            = "stackfix"
+version         = "1.0.0"
+description     = "Pipe any error. Get the fix. Instantly."
+readme          = "README.md"
+license         = { text = "MIT" }
+requires-python = ">=3.8"
+authors         = [{ name = "Faizan" }]
+keywords        = ["cli", "debugging", "errors", "developer-tools", "automation", "stacktrace"]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Debuggers",
+    "Topic :: Utilities",
+]
+
+dependencies = [
+    "click>=8.0",
+    "rich>=13.0",
+    "requests>=2.28",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1",
+    "mypy>=1.0",
+]
+
+[project.urls]
+Homepage      = "https://github.com/yourusername/stackfix"
+Documentation = "https://github.com/yourusername/stackfix#readme"
+"Bug Tracker" = "https://github.com/yourusername/stackfix/issues"
+Changelog     = "https://github.com/yourusername/stackfix/blob/main/CHANGELOG.md"
+
+[project.scripts]
+stackfix = "stackfix.cli:main"
+
+# ──────────────────────────────────────────────────────────────────────────
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["stackfix*"]
+
+# ──────────────────────────────────────────────────────────────────────────
+[tool.black]
+line-length    = 100
+target-version = ["py38"]
+
+[tool.ruff]
+line-length = 100
+select      = ["E", "F", "W", "I"]
+ignore      = ["E501"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths    = ["tests"]
+addopts      = "--tb=short -q"
